@@ -1,26 +1,17 @@
-from __future__ import division
 import numpy as np
 from nltk.tokenize import word_tokenize, sent_tokenize
-from nltk.tag import map_tag
 from collections import Counter
 import nltk
 import os
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 from nltk.corpus import stopwords
 import spacy
-from spacy.lang.en import English
 
 import re
 import pickle
 import math
-import argparse
  
 import pandas as pd
-import time
 from tqdm import tqdm
-
-np.random.seed(13)
 
 nltk.download('cmudict')
 nltk.download('stopwords')
@@ -52,7 +43,6 @@ def tokenize(text):  # tokenize the text
 # Lexical feature (word level)
 # Average word length of a document
 def average_word_length(words):
-    # word_list = text_doc.split(" ")
     if len(words)==0:
         return 0
     average = sum(len(word) for word in words)/(len(words))
@@ -60,7 +50,6 @@ def average_word_length(words):
 
 # Total number of short words (length <4) in a document
 def total_short_words(words):
-    # word_list = text_doc.split(" ")
     count_short_word = 0
     if len(words)==0:
         return 0
@@ -120,21 +109,18 @@ def count_digit_freq(text_doc):
 
 # Average sentence length in a document
 def average_sentence_length(sent_list):
-    # sent_list = sent_tokenize(text_doc, language='english')
     average = sum(len(tokenize(sent)) for sent in sent_list)/(len(sent_list))
     return average
 
 
 # Lexical Feature (vocabulary richness)
 def hapax_legomena_ratio(words):  # # per document only a float value
-    # word_list = text.split(" ")
     fdist = nltk.FreqDist(word for word in words)
     fdist_hapax = nltk.FreqDist.hapaxes(fdist)
     return float(len(fdist_hapax)/(len(words)))
 
 
 def dislegomena_ratio(words):  # per document only a float value
-    # word_list = text.split(" ")
     vocabulary_size = len(set(words))
     freqs = Counter(nltk.probability.FreqDist(words).values())
     VN = lambda i:freqs[i]
@@ -142,7 +128,6 @@ def dislegomena_ratio(words):  # per document only a float value
 
 def CountFunctionalWords(words):
 
-    # words = RemoveSpecialCHs(text)
     count = 0
 
     for i in words:
@@ -152,7 +137,6 @@ def CountFunctionalWords(words):
     return count / len(words)
 
 def freq_function_word(words):  # per document (vector with length 174)
-    # words = text.split(" ")
     count = {}
     n_words=len(words)
     for s in words:
