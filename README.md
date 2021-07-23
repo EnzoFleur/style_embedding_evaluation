@@ -1,11 +1,17 @@
 # Style Evaluation for Author Embedding
 This repository contains a framework to perform author embedding evaluation on a writing style axis.
 
+## Requirements
+```bash
+spacy >= 3.0.1
+nltk >= 3.5
+```
+
 ## Description
 ### Feature extraction
 It first extracts for a raw text corpus stylistic features. Data directory should be organized as follow (see dataset directory for example) :
 
-```
+```bash
 .\data_dir\author1
           \author1\text1.txt
           \author1\text2.txt
@@ -19,7 +25,7 @@ It first extracts for a raw text corpus stylistic features. Data directory shoul
 
 To perform extraction run :
 
-```
+```bash
 from extractor import build_authorship
 data_dir = "dataset"
 authorship = build_authorship(data_dir)
@@ -33,7 +39,7 @@ Authorship is a dataframe linking each author to its textual production, while s
 ### Embedding evaluation
 To perform embedding evaluation, run the following code with your custom embeddings :
 
-```
+```bash
 import numpy as np
 embeddings = np.random.randn(3,3,512)
 
@@ -47,7 +53,7 @@ df_results = multi_style_evaluation(embeddings, names["model1", "model2", "model
 ```
 
 You can then produce a spyder chart as follow : 
-```
+```bash
 from regressor import style_spyder_charts
 style_spyder_charts(df_results)
 ```
