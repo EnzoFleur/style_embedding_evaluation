@@ -1,2 +1,3 @@
-# style_embedding_evaluation
-This repository allows to perform the evaluation of author embedding on a writing style axis.
+# Style Evaluation for Author Embedding
+This repository contains a framework to perform author embedding evaluation on a writing style axis.
+
