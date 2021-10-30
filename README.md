@@ -27,7 +27,7 @@ To perform extraction run :
 
 ```bash
 from extractor import build_authorship
-data_dir = "dataset"
+data_dir = "dataset\\English"
 authorship = build_authorship(data_dir)
 
 from extractor import create_stylometrics
